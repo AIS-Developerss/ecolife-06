@@ -1,0 +1,19 @@
+FROM golang:1.23-alpine
+
+WORKDIR /app
+
+# Устанавливаем необходимые пакеты
+RUN apk add --no-cache git
+
+# Копируем go mod файлы
+COPY go.mod go.sum ./
+
+# Копируем исходный код
+COPY . .
+
+# Expose port
+EXPOSE 8080
+
+# Команда будет переопределена в docker-compose
+CMD ["go", "run", "./cmd/api/main.go"]
+
