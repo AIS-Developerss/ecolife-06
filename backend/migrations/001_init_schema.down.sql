@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS applications;
+DROP TABLE IF EXISTS containers;
+DROP TABLE IF EXISTS benefits;
+DROP TABLE IF EXISTS tariffs;
+
