@@ -19,64 +19,48 @@ services:
       timeout: 5s
       retries: 5
 
-  redis:
-    image: redis:7-alpine
-    container_name: ecolife-redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
     container_name: ecolife-backend
-    env_file:
-      - ./backend/.env
     environment:
       # Переопределяем для Docker окружения
       DB_HOST: postgres
-      REDIS_HOST: redis
-      CORS_ALLOWED_ORIGINS: http://localhost:3000
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: ecolife
+      DB_SSLMODE: disable
+      SERVER_PORT: 8080
+      SERVER_HOST: 0.0.0.0
+      LOG_LEVEL: INFO
+      CORS_ALLOWED_ORIGINS: http://localhost:8000,http://localhost:3000
     ports:
       - "8080:8080"
     depends_on:
       postgres:
         condition: service_healthy
-      redis:
-        condition: service_healthy
     volumes:
       - ./backend:/app
       - go_modules:/go/pkg/mod
     command: sh -c "go mod download && go run ./cmd/api/main.go"
+    restart: unless-stopped
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: ecolife-frontend
-    env_file:
-      - ./frontend/.env.local
-    environment:
-      # Переопределяем для Docker окружения
-      NEXT_PUBLIC_API_URL: http://localhost:8080/api
     ports:
-      - "3000:3000"
+      - "8000:8000"
     depends_on:
       - backend
     volumes:
       - ./frontend:/app
-      - /app/node_modules
-      - /app/.next
+    restart: unless-stopped
 
 volumes:
   postgres_data:
-  redis_data:
   go_modules:
 

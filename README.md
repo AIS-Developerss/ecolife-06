@@ -8,15 +8,13 @@
 - **Golang 1.23** - основной язык программирования
 - **Gin** - веб-фреймворк
 - **PostgreSQL** - база данных
-- **Redis** - кэширование
 - **Чистая архитектура** - разделение на слои (domain, application, infrastructure, presentation)
 - **DDD** - Domain-Driven Design подход
 
 ### Frontend
-- **Next.js 14** - React фреймворк
-- **TypeScript** - типизация
-- **Tailwind CSS** - стилизация
-- **React Hook Form** - работа с формами
+- **HTML/CSS/JavaScript** - статический сайт
+- **Tailwind CSS** (CDN) - стилизация
+- **Vanilla JavaScript** - работа с формами и API
 
 ## Структура проекта
 
@@ -29,15 +27,18 @@ ecolife-06/
 │   ├── internal/
 │   │   ├── domain/              # Доменные сущности и интерфейсы
 │   │   ├── application/         # Use cases (бизнес-логика)
-│   │   ├── infrastructure/      # Реализация репозиториев (PostgreSQL, Redis)
+│   │   ├── infrastructure/      # Реализация репозиториев (PostgreSQL, logger)
 │   │   └── presentation/        # HTTP handlers и middleware
 │   ├── migrations/              # SQL миграции
 │   └── go.mod
 ├── frontend/
-│   ├── app/                     # Next.js App Router
-│   ├── components/              # React компоненты
-│   ├── lib/                     # Утилиты и API клиент
-│   └── package.json
+│   ├── index.html              # Главная страница
+│   ├── css/
+│   │   └── main.css            # Стили
+│   ├── js/
+│   │   └── main.js             # JavaScript логика
+│   ├── assets/                 # Изображения и другие ресурсы
+│   └── Dockerfile              # Docker образ для фронтенда
 └── docker-compose.yml
 ```
 
@@ -45,17 +46,18 @@ ecolife-06/
 
 ### Требования
 - Docker и Docker Compose
-- Go 1.23+ (для локальной разработки)
-- Node.js 20+ (для локальной разработки)
+- Go 1.23+ (для локальной разработки backend)
 
 ### Настройка переменных окружения
 
-Перед запуском необходимо настроить переменные окружения:
+Перед запуском необходимо настроить переменные окружения для backend:
 
-1. **Backend**: Скопируйте `backend/.env.example` в `backend/.env` и настройте под ваше окружение
-2. **Frontend**: Скопируйте `frontend/.env.local.example` в `frontend/.env.local` и настройте URL API
+1. Скопируйте файл `.env.example` в `.env`:
+```bash
+cp backend/.env.example backend/.env
+```
 
-Подробная инструкция в файле [ENV_SETUP.md](./ENV_SETUP.md)
+2. Отредактируйте `backend/.env` под ваши настройки (см. `backend/.env.example`)
 
 ### Запуск через Docker Compose
 
@@ -72,11 +74,22 @@ cd ecolife-06
 docker-compose up -d
 ```
 
-4. Приложение будет доступно:
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8080
-   - PostgreSQL: localhost:5432
-   - Redis: localhost:6379
+4. Дождитесь запуска всех контейнеров (около 30-60 секунд)
+
+5. Приложение будет доступно:
+   - **Frontend**: http://localhost:8000
+   - **Backend API**: http://localhost:8080/api
+   - **PostgreSQL**: localhost:5433
+
+6. Для просмотра логов:
+```bash
+docker-compose logs -f
+```
+
+7. Для остановки:
+```bash
+docker-compose down
+```
 
 ### Локальная разработка
 
@@ -87,61 +100,46 @@ docker-compose up -d
 cp backend/.env.example backend/.env
 ```
 
-2. Отредактируйте `backend/.env` под ваши настройки (см. `backend/.env.example`)
+2. Отредактируйте `backend/.env` под ваши настройки
 
-2. Установите зависимости:
+3. Установите зависимости:
 ```bash
 cd backend
 go mod download
 ```
 
-3. Запустите миграции (используя golang-migrate или напрямую через psql):
+4. Запустите миграции:
 ```bash
 psql -U postgres -d ecolife -f migrations/001_init_schema.up.sql
 ```
 
-4. Запустите сервер:
+5. Запустите сервер:
 ```bash
 go run cmd/api/main.go
 ```
 
 #### Frontend
 
-1. Скопируйте файл `.env.local.example` в `.env.local`:
-```bash
-cp frontend/.env.local.example frontend/.env.local
-```
+Фронтенд - это статический сайт, можно открыть напрямую в браузере:
 
-2. Отредактируйте `frontend/.env.local` и укажите URL вашего backend API
+1. Откройте `frontend/index.html` в браузере
 
-3. Установите зависимости:
+2. Или используйте простой HTTP сервер:
 ```bash
 cd frontend
-npm install
+python3 -m http.server 8000
 ```
 
-4. Запустите dev сервер:
-```bash
-npm run dev
-```
+3. Откройте http://localhost:8000
+
+**Важно**: При локальной разработке фронтенда убедитесь, что в `frontend/index.html` указан правильный URL API в атрибуте `data-action` формы (по умолчанию `http://localhost:8080/api/feedback`).
 
 ## API Endpoints
 
-### Applications (Заявки)
-- `POST /api/applications` - Создать заявку
-- `GET /api/applications` - Получить все заявки (с пагинацией)
-- `GET /api/applications/:id` - Получить заявку по ID
-
-### Containers (Контейнеры)
-- `GET /api/containers` - Получить все контейнеры
-- `GET /api/containers/:id` - Получить контейнер по ID
-
-### Benefits (Льготы)
-- `GET /api/benefits` - Получить все льготы
-
-### Tariffs (Тарифы)
-- `GET /api/tariffs` - Получить все тарифы
-- `GET /api/tariffs/current` - Получить текущий тариф
+### Feedback (Обратная связь)
+- `POST /api/feedback` - Создать заявку из формы обратной связи
+  - Тело запроса: `{"name": "Имя", "phone": "+79991234567"}`
+  - Ответ: `201 Created` с данными созданной заявки
 
 ## Особенности реализации
 
@@ -149,10 +147,71 @@ npm run dev
 2. **DDD**: Доменные сущности и интерфейсы определены в слое domain
 3. **Graceful shutdown**: Корректное завершение работы сервера
 4. **CORS**: Настроен для работы с фронтендом
-5. **Миграции**: SQL миграции для управления схемой БД
-6. **Docker**: Полная контейнеризация для легкого развертывания
+5. **Rate Limiting**: Ограничение частоты запросов (10 запросов в минуту с одного IP)
+6. **Валидация данных**: Проверка формата телефона, имени и других полей
+7. **Структурированное логирование**: JSON логи с уровнем, временем и контекстом
+8. **Обработка ошибок**: Безопасные сообщения об ошибках на русском языке
+9. **Миграции**: SQL миграции для управления схемой БД
+10. **Docker**: Полная контейнеризация для легкого развертывания
+
+## Безопасность
+
+- Валидация всех входящих данных
+- Защита от SQL-инъекций (параметризованные запросы)
+- CORS настройка для ограничения источников запросов
+- Rate limiting для защиты от злоупотреблений
+- Санитизация пользовательского ввода
+- Безопасная обработка ошибок (не раскрываются внутренние детали)
+
+## Переменные окружения
+
+### Backend
+
+| Переменная | Описание | По умолчанию |
+|------------|----------|--------------|
+| `SERVER_PORT` | Порт для HTTP сервера | `8080` |
+| `SERVER_HOST` | Хост для HTTP сервера | `0.0.0.0` |
+| `DB_HOST` | Хост PostgreSQL | `localhost` |
+| `DB_PORT` | Порт PostgreSQL | `5432` |
+| `DB_USER` | Пользователь PostgreSQL | `postgres` |
+| `DB_PASSWORD` | Пароль PostgreSQL | `postgres` |
+| `DB_NAME` | Имя базы данных | `ecolife` |
+| `DB_SSLMODE` | Режим SSL для PostgreSQL | `disable` |
+| `LOG_LEVEL` | Уровень логирования (DEBUG, INFO, WARN, ERROR) | `INFO` |
+| `CORS_ALLOWED_ORIGINS` | Разрешенные origins для CORS (через запятую) | `http://localhost:8000` |
+
+## Полезные команды
+
+```bash
+# Просмотр логов всех сервисов
+docker-compose logs -f
+
+# Просмотр логов конкретного сервиса
+docker-compose logs -f backend
+docker-compose logs -f frontend
+docker-compose logs -f postgres
+
+# Перезапуск сервиса
+docker-compose restart backend
+
+# Пересборка и перезапуск
+docker-compose up -d --build
+
+# Остановка всех сервисов
+docker-compose down
+
+# Остановка и удаление volumes (удалит данные БД)
+docker-compose down -v
+
+# Проверка работы API
+curl -X POST http://localhost:8080/api/feedback \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Тест","phone":"+79991234567"}'
+
+# Проверка данных в БД
+docker-compose exec postgres psql -U postgres -d ecolife -c "SELECT * FROM applications ORDER BY created_at DESC LIMIT 5;"
+```
 
 ## Лицензия
 
 MIT
-

@@ -3,7 +3,6 @@ package application
 import (
 	"context"
 	"ecolife-06/backend/internal/domain"
-	"errors"
 )
 
 // ApplicationService представляет сервис для работы с заявками
@@ -18,30 +17,37 @@ func NewApplicationService(appRepo domain.ApplicationRepository) *ApplicationSer
 	}
 }
 
-// CreateApplication создает новую заявку
-func (s *ApplicationService) CreateApplication(ctx context.Context, req *CreateApplicationRequest) (*domain.Application, error) {
-	if req.FullName == "" {
-		return nil, errors.New("full name is required")
+// CreateFeedbackRequest представляет запрос на обратную связь (минимальные поля)
+type CreateFeedbackRequest struct {
+	Name  string `json:"name"`
+	Phone string `json:"phone"`
+}
+
+// CreateFeedback создает заявку из формы обратной связи (только имя и телефон)
+func (s *ApplicationService) CreateFeedback(ctx context.Context, req *CreateFeedbackRequest) (*domain.Application, error) {
+	// Валидация имени
+	if err := ValidateName(req.Name); err != nil {
+		return nil, err
 	}
-	if req.Phone == "" {
-		return nil, errors.New("phone is required")
+	
+	// Валидация телефона
+	if err := ValidatePhone(req.Phone); err != nil {
+		return nil, err
 	}
-	if req.Address == "" {
-		return nil, errors.New("address is required")
-	}
-	if req.District == "" {
-		return nil, errors.New("district is required")
-	}
+	
+	// Санитизация данных
+	name := SanitizeString(req.Name)
+	phone := SanitizeString(req.Phone)
 
 	app := &domain.Application{
 		ID:          generateID(),
-		FullName:    req.FullName,
-		Phone:       req.Phone,
-		Address:     req.Address,
-		District:    req.District,
-		ContainerID: req.ContainerID,
-		ServiceType: req.ServiceType,
-		Status:      string(domain.StatusNew),
+		FullName:    name,
+		Phone:       phone,
+		Address:     "", // Необязательное поле для формы обратной связи
+		District:    "", // Необязательное поле для формы обратной связи
+		ContainerID: "",
+		ServiceType: "household", // Значение по умолчанию
+		Status:      "new",
 	}
 
 	if err := s.appRepo.Create(ctx, app); err != nil {
@@ -49,35 +55,4 @@ func (s *ApplicationService) CreateApplication(ctx context.Context, req *CreateA
 	}
 
 	return app, nil
-}
-
-// GetApplication получает заявку по ID
-func (s *ApplicationService) GetApplication(ctx context.Context, id string) (*domain.Application, error) {
-	return s.appRepo.GetByID(ctx, id)
-}
-
-// GetAllApplications получает все заявки с пагинацией
-func (s *ApplicationService) GetAllApplications(ctx context.Context, limit, offset int) ([]*domain.Application, error) {
-	return s.appRepo.GetAll(ctx, limit, offset)
-}
-
-// UpdateApplicationStatus обновляет статус заявки
-func (s *ApplicationService) UpdateApplicationStatus(ctx context.Context, id string, status domain.ApplicationStatus) error {
-	app, err := s.appRepo.GetByID(ctx, id)
-	if err != nil {
-		return err
-	}
-
-	app.Status = string(status)
-	return s.appRepo.Update(ctx, app)
-}
-
-// CreateApplicationRequest представляет запрос на создание заявки
-type CreateApplicationRequest struct {
-	FullName    string `json:"full_name"`
-	Phone       string `json:"phone"`
-	Address     string `json:"address"`
-	District    string `json:"district"`
-	ContainerID string `json:"container_id,omitempty"`
-	ServiceType string `json:"service_type"`
 }

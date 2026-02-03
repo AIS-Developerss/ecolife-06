@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"ecolife-06/backend/internal/application"
+	"ecolife-06/backend/internal/infrastructure/logger"
 	"ecolife-06/backend/internal/infrastructure/postgres"
-	"ecolife-06/backend/internal/infrastructure/redis"
 	"ecolife-06/backend/internal/presentation"
 
 	"github.com/joho/godotenv"
@@ -42,33 +42,18 @@ func main() {
 	}
 	defer db.Close()
 
-	// Конфигурация Redis
-	redisConfig := redis.Config{
-		Host:     getEnv("REDIS_HOST", "localhost"),
-		Port:     getEnvInt("REDIS_PORT", 6379),
-		Password: getEnv("REDIS_PASSWORD", ""),
-		DB:       getEnvInt("REDIS_DB", 0),
-	}
-
-	// Подключение к Redis
-	redisClient, err := redis.NewClient(redisConfig)
-	if err != nil {
-		log.Printf("Failed to connect to Redis: %v (continuing without Redis)", err)
-	} else {
-		defer redisClient.Close()
-	}
-
 	// Инициализация репозиториев
 	appRepo := postgres.NewApplicationRepository(db)
-	containerRepo := postgres.NewContainerRepository(db)
-	benefitRepo := postgres.NewBenefitRepository(db)
-	tariffRepo := postgres.NewTariffRepository(db)
 
 	// Инициализация сервисов
 	appService := application.NewApplicationService(appRepo)
-	containerService := application.NewContainerService(containerRepo)
-	benefitService := application.NewBenefitService(benefitRepo)
-	tariffService := application.NewTariffService(tariffRepo)
+
+	// Инициализация логгера
+	logLevel := logger.Level(getEnv("LOG_LEVEL", "INFO"))
+	appLogger := logger.NewLogger(logLevel)
+	appLogger.Info("Application starting", map[string]interface{}{
+		"version": "1.0.0",
+	})
 
 	// Настройка роутера
 	// Поддерживаем несколько origins через запятую
@@ -76,10 +61,8 @@ func main() {
 	allowedOrigins := parseCORSOrigins(corsOrigins)
 	router := presentation.SetupRouter(
 		appService,
-		containerService,
-		benefitService,
-		tariffService,
 		allowedOrigins,
+		appLogger,
 	)
 
 	// Настройка сервера
@@ -94,8 +77,13 @@ func main() {
 
 	// Graceful shutdown
 	go func() {
-		log.Printf("Server starting on %s", addr)
+		appLogger.Info("Server starting", map[string]interface{}{
+			"address": addr,
+		})
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			appLogger.Error("Failed to start server", map[string]interface{}{
+				"error": err.Error(),
+			})
 			log.Fatalf("Failed to start server: %v", err)
 		}
 	}()
@@ -105,16 +93,19 @@ func main() {
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
 
-	log.Println("Shutting down server...")
+	appLogger.Info("Shutting down server", nil)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	if err := srv.Shutdown(ctx); err != nil {
+		appLogger.Error("Server forced to shutdown", map[string]interface{}{
+			"error": err.Error(),
+		})
 		log.Fatalf("Server forced to shutdown: %v", err)
 	}
 
-	log.Println("Server exited")
+	appLogger.Info("Server exited", nil)
 }
 
 func getEnv(key, defaultValue string) string {
