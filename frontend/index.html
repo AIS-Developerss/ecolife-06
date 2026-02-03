@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Эколайф — утилизация отходов, забота об окружающей среде</title>
+    <meta
+      name="description"
+      content="Ответственный вывоз отходов. Вывоз мусора, установка контейнеров, экологичные решения. Республика Ингушетия."
+    />
+    <link rel="icon" type="image/png" href="assets/images/logo.png" />
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CDN для утилит -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body class="antialiased">
+    <!-- Header -->
+    <header class="header">
+      <div class="header__container">
+        <a href="#" class="header__logo-link">
+          <img
+            class="header__logo"
+            src="assets/images/logo.png"
+            onerror="this.src='Эколайф_ Решения по утилизации отходов, заботящиеся об окружающей среде_files/222.png'"
+            alt="Эколайф"
+            width="140"
+            height="auto"
+          />
+        </a>
+        <nav class="header__nav" aria-label="Основное меню">
+          <ul class="header__nav-list">
+            <li><a href="#services" class="header__nav-link">Услуги</a></li>
+            <li><a href="#prices" class="header__nav-link">Цены</a></li>
+            <li><a href="#careers" class="header__nav-link">Вакансии</a></li>
+            <li><a href="#contact" class="header__nav-link">Контакты</a></li>
+          </ul>
+        </nav>
+        <div class="header__actions">
+          <a href="tel:+79280073838" class="header__phone">+7 928 007-38-38</a>
+          <div class="header__actions-btns">
+            <a
+              href="https://wa.me/79888143271"
+              target="_blank"
+              rel="noopener"
+              class="header__btn"
+              >WhatsApp Назрань</a
+            >
+            <a
+              href="https://wa.me/79220449258"
+              target="_blank"
+              rel="noopener"
+              class="header__btn"
+              >WhatsApp Сунжа</a
+            >
+          </div>
+        </div>
+        <button
+          type="button"
+          class="header__burger"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="header__mobile-nav" id="mobileNav" aria-hidden="true">
+        <ul class="header__mobile-list">
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#prices">Цены</a></li>
+          <li><a href="#careers">Вакансии</a></li>
+          <li><a href="#contact">Контакты</a></li>
+        </ul>
+        <div class="header__mobile-actions">
+          <a href="tel:+79280073838" class="header__mobile-phone"
+            >+7 928 007-38-38</a
+          >
+          <a
+            href="https://wa.me/79888143271"
+            target="_blank"
+            rel="noopener"
+            class="header__btn"
+            >WhatsApp Назрань</a
+          >
+          <a
+            href="https://wa.me/79220449258"
+            target="_blank"
+            rel="noopener"
+            class="header__btn"
+            >WhatsApp Сунжа</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero" id="hero">
+        <div class="hero__container">
+          <div class="hero__content animate-on-scroll">
+            <h1 class="hero__title">Ответственные подходы к вывозу отходов</h1>
+            <p class="hero__text">
+              Ответственный вывоз отходов очень важен для защиты нашей планеты.
+              Мы помогаем компаниям и частным лицам сократить вред, который они
+              наносят окружающей среде, предлагая комплексные решения для всех
+              ваших потребностей в вывозе бытовых отходов. От эффективного
+              вывоза мусора до экологически чистых вариантов переработки мы
+              предлагаем полный спектр услуг.
+            </p>
+            <a href="#contact" class="hero__cta">Вывезти мусор</a>
+          </div>
+          <div class="hero__image-wrap animate-on-scroll animate-delay-2">
+            <img
+              class="hero__image"
+              src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&q=80"
+              alt="Утилизация отходов и экология"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Услуги -->
+      <section class="section services" id="services">
+        <div class="section__container">
+          <div class="section__header animate-on-scroll">
+            <h2 class="section__title">Услуги для более чистого будущего</h2>
+            <p class="section__subtitle">
+              Наши услуги включают не только вывоз мусора, но и решения для
+              оптимизации утилизации отходов: надёжный вывоз, удобные программы
+              переработки, установка контейнеров и экологичные варианты.
+            </p>
+          </div>
+          <div class="services__item animate-on-scroll">
+            <div class="services__image-wrap">
+              <img
+                class="services__image"
+                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&q=80"
+                alt="Вывоз мусора"
+                loading="lazy"
+              />
+            </div>
+            <div class="services__content">
+              <h3 class="services__item-title">Вывоз мусора</h3>
+              <p class="services__item-text">
+                Организуем регулярный вывоз бытовых и строительных отходов с
+                объектов любого типа.
+              </p>
+            </div>
+          </div>
+          <div class="services__item animate-on-scroll">
+            <div class="services__image-wrap">
+              <img
+                class="services__image"
+                src="https://images.unsplash.com/photo-1604187351574-c75ca79f5807?w=600&q=80"
+                alt="Контейнер 120л"
+                loading="lazy"
+              />
+            </div>
+            <div class="services__content">
+              <h3 class="services__item-title">
+                Мусорный контейнер 120л — 3000 ₽
+              </h3>
+              <p class="services__item-text">
+                Стоимость вывоза — 500 рублей (два раза в неделю).
+              </p>
+            </div>
+          </div>
+          <div class="services__item animate-on-scroll">
+            <div class="services__image-wrap">
+              <img
+                class="services__image"
+                src="https://media.istockphoto.com/id/1006013318/photo/yellow-garbage-cans-and-garbage-bags.webp?a=1&b=1&s=612x612&w=0&k=20&c=Caco9ZjTOjpZqncGjuKau2FsvNtvpu1kqhPMd2FrDvY="
+                alt="Контейнер 240л"
+                loading="lazy"
+              />
+            </div>
+            <div class="services__content">
+              <h3 class="services__item-title">
+                Мусорный контейнер 240л — 4000 ₽
+              </h3>
+              <p class="services__item-text">
+                Стоимость вывоза — 500 рублей (два раза в неделю).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Преимущества -->
+      <section class="section advantages">
+        <div class="section__container">
+          <div class="section__header animate-on-scroll">
+            <h2 class="section__title">Почувствуйте разницу с Эколайф</h2>
+            <p class="section__subtitle">
+              Выбирая Эколайф, вы выбираете удобство, эффективность и
+              экологическую ответственность. Мы делаем экологичность доступной
+              для всех.
+            </p>
+          </div>
+          <ul class="advantages__list">
+            <li class="advantages__item animate-on-scroll">
+              <span class="advantages__icon" aria-hidden="true">★</span>
+              <div>
+                <h3 class="advantages__title">Удобство обслуживания</h3>
+                <p class="advantages__text">
+                  Гибкие графики вывоза мусора и установка контейнеров в удобное
+                  для вас время.
+                </p>
+              </div>
+            </li>
+            <li class="advantages__item animate-on-scroll">
+              <span class="advantages__icon" aria-hidden="true">♻</span>
+              <div>
+                <h3 class="advantages__title">
+                  Эффективное управление отходами
+                </h3>
+                <p class="advantages__text">
+                  Наши технологии позволяют оптимизировать процесс сбора и
+                  утилизации отходов.
+                </p>
+              </div>
+            </li>
+            <li class="advantages__item animate-on-scroll">
+              <span class="advantages__icon" aria-hidden="true">⚖</span>
+              <div>
+                <h3 class="advantages__title">
+                  Экономичность и экологическая ответственность
+                </h3>
+                <p class="advantages__text">
+                  Снижаем ваши расходы и способствуем сохранению природы через
+                  переработку и компостирование.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Цены -->
+      <section class="section prices" id="prices">
+        <div class="section__container">
+          <div class="section__header animate-on-scroll">
+            <h2 class="section__title">Прозрачные и понятные цены</h2>
+            <p class="section__subtitle">
+              Мы предлагаем пакеты услуг для ваших нужд и бюджета. Честные цены
+              и открытое общение.
+            </p>
+          </div>
+          <div class="prices__grid">
+            <div class="prices__card animate-on-scroll">
+              <h3 class="prices__card-title">Вывоз мусора</h3>
+              <p class="prices__card-subtitle">
+                Регулярный вывоз бытовых отходов 2 раза в неделю
+              </p>
+              <p class="prices__card-price">500 ₽</p>
+              <p class="prices__card-desc">Контейнер 120–240 литров</p>
+              <a href="#contact" class="prices__card-btn">Заказать</a>
+            </div>
+            <div class="prices__card animate-on-scroll animate-delay-2">
+              <h3 class="prices__card-title">Установка контейнеров</h3>
+              <p class="prices__card-subtitle">
+                Размещение и обслуживание мусорных баков
+              </p>
+              <p class="prices__card-price">от 3000 ₽</p>
+              <p class="prices__card-desc">Объём 120–1100 литров</p>
+              <a href="#contact" class="prices__card-btn">Заказать</a>
+            </div>
+            <div class="prices__card animate-on-scroll animate-delay-3">
+              <h3 class="prices__card-title">Вывоз строительного мусора</h3>
+              <p class="prices__card-subtitle">
+                Полный спектр услуг по работе с отходами
+              </p>
+              <p class="prices__card-price">от 5000 ₽</p>
+              <p class="prices__card-desc">Вывоз и установка контейнеров</p>
+              <a href="#contact" class="prices__card-btn">Заказать</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Вакансии -->
+      <section
+        class="careers"
+        id="careers"
+        style="
+          background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80');
+        "
+      >
+        <div class="careers__content animate-on-scroll">
+          <p class="careers__text">
+            Наша дружная команда ищет в свой штат таких же дружных,
+            ответственных и трудолюбивых коллег. Если вам интересна работа в
+            молодой, перспективной компании — свяжитесь с нами!
+          </p>
+        </div>
+      </section>
+
+      <!-- Контакты и форма -->
+      <section class="section contact" id="contact">
+        <div class="section__container">
+          <div class="section__header animate-on-scroll">
+            <h2 class="section__title">Свяжитесь с нами</h2>
+            <p class="section__subtitle">
+              Для заказа услуги или консультации по вывозу мусора и установке
+              контейнеров свяжитесь с нами удобным способом.
+            </p>
+          </div>
+          <div class="contact__grid">
+            <div class="contact__info animate-on-scroll">
+              <h3 class="contact__info-title">Адрес</h3>
+              <p class="contact__info-address">
+                386230, Республика Ингушетия, г. Карабулак, ул. Осканова, д. 44
+              </p>
+              <p class="contact__info-legal">
+                ООО «ЭКОЛАЙФ»<br />
+                ИНН 0608039315, КПП 060301001<br />
+                ОГРН 1150608019319, ОКПО 36460958
+              </p>
+              <div class="contact__links">
+                <a
+                  href="https://wa.me/79888143271"
+                  target="_blank"
+                  rel="noopener"
+                  class="contact__link"
+                  aria-label="WhatsApp"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="mailto:info@eco-life06.ru"
+                  class="contact__link"
+                  aria-label="Email"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <form
+              class="form-contact animate-on-scroll"
+              id="contactForm"
+              action="#"
+              method="post"
+              data-action="/api/feedback"
+            >
+              <div class="form-contact__success" id="formSuccess" role="status">
+                Спасибо! Мы свяжемся с вами в ближайшее время.
+              </div>
+              <div
+                class="form-contact__error"
+                id="formError"
+                role="alert"
+              ></div>
+              <div class="form-contact__group">
+                <input
+                  type="tel"
+                  class="form-contact__input"
+                  name="phone"
+                  id="formPhone"
+                  placeholder="+7 (999) 999-99-99"
+                  required
+                />
+              </div>
+              <div class="form-contact__group">
+                <input
+                  type="text"
+                  class="form-contact__input"
+                  name="name"
+                  id="formName"
+                  placeholder="Ваше имя"
+                  required
+                  autocomplete="name"
+                />
+              </div>
+              <button
+                type="submit"
+                class="form-contact__submit"
+                id="formSubmit"
+              >
+                Связаться
+              </button>
+              <p class="form-contact__privacy">
+                Нажимая кнопку, вы даёте согласие на обработку персональных
+                данных и соглашаетесь с политикой конфиденциальности.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__container">
+        <p class="footer__copyright">© Эколайф 2026</p>
+        <a href="#" class="footer__back-top" id="backToTop"
+          >Вернуться наверх ↑</a
+        >
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
