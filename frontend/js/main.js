@@ -96,7 +96,8 @@
 
       // Всегда используем полный URL к бэкенду
       // В Docker окружении фронтенд на порту 8000, бэкенд на 8080
-      var apiUrl = form.getAttribute("data-action") || "http://localhost:8080/api/feedback";
+      var apiUrl =
+        form.getAttribute("data-action") || "https://ecolife.ru/api/feedback";
 
       var controller = new AbortController();
       var timeoutId = setTimeout(function () {
