@@ -29,7 +29,8 @@
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .animate-on-scroll.is-visible {
@@ -101,11 +102,18 @@
   padding: 0.5rem 1rem;
   color: #1b2838;
   font-weight: 600;
-  font-family: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Manrope",
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 8px;
-  transition: color 0.2s, background-color 0.2s;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
 }
 .header__nav-link:hover {
   color: #2d6a4f;
@@ -149,7 +157,9 @@
   border-radius: 100px;
   text-decoration: none;
   white-space: nowrap;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 .header__btn:hover {
   transform: translateY(-2px);
@@ -174,7 +184,9 @@
   height: 3px;
   background-color: #1b2838;
   border-radius: 2px;
-  transition: transform 0.35s, opacity 0.2s;
+  transition:
+    transform 0.35s,
+    opacity 0.2s;
 }
 .header__burger.is-open span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
@@ -243,6 +255,15 @@
   font-weight: 700;
   color: #1b2838;
   margin: 0 0 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.section__title .section__icon {
+  flex-shrink: 0;
+  color: #2d6a4f;
 }
 .section__subtitle {
   font-size: 1.125rem;
@@ -354,7 +375,9 @@
   background-color: #2d6a4f;
   border-radius: 30px;
   text-decoration: none;
-  transition: background-color 0.2s, transform 0.2s;
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
 }
 .hero__cta:hover {
   background-color: #1b4332;
@@ -474,7 +497,9 @@
   border-radius: 16px;
   padding: 2rem;
   text-align: center;
-  transition: transform 0.35s, box-shadow 0.35s;
+  transition:
+    transform 0.35s,
+    box-shadow 0.35s;
 }
 .prices__card:hover {
   transform: translateY(-6px);
@@ -512,7 +537,9 @@
   border: 1px solid #1b2838;
   border-radius: 30px;
   text-decoration: none;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 .prices__card-btn:hover {
   background-color: #1b2838;
@@ -592,7 +619,9 @@
   color: #2d6a4f;
   background-color: rgba(45, 106, 79, 0.1);
   border-radius: 50%;
-  transition: background-color 0.2s, transform 0.2s;
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
 }
 .contact__link:hover {
   background-color: rgba(45, 106, 79, 0.2);
@@ -640,7 +669,9 @@
   background: #ffffff;
   border: 1px solid #d8e2dc;
   border-radius: 12px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 .form-contact__input::placeholder {
   color: #5c6b73;
@@ -663,7 +694,9 @@
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
 }
 .form-contact__submit:hover:not(:disabled) {
   background-color: #1b4332;
@@ -726,7 +759,12 @@ html {
 
 body {
   margin: 0;
-  font-family: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Manrope",
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #1b2838;
@@ -785,6 +823,10 @@ a {
   .hero__cta {
     min-width: 260px;
     text-align: center;
+  }
+
+  .section__title {
+    flex-direction: column;
   }
 
   .services__item {
