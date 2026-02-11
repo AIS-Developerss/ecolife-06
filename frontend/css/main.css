@@ -605,6 +605,49 @@
   line-height: 1.6;
   margin: 0 0 1rem;
 }
+/* Блок контактных телефонов и WhatsApp */
+.contacts-block {
+  max-width: 500px;
+  margin-bottom: 1rem;
+}
+.contacts-block .contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.contacts-block .contact-number a {
+  font-weight: 600;
+  color: #1b2838;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.contacts-block .contact-number a:hover {
+  color: #2d6a4f;
+}
+.contacts-block .contact-description {
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #5c6b73;
+  line-height: 1.4;
+}
+.contacts-block .whatsapp-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 600;
+  color: #fff;
+  background-color: #25d366;
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
+}
+.contacts-block .whatsapp-btn:hover {
+  background-color: #20bd5a;
+  transform: translateY(-1px);
+}
+
 .contact__links {
   display: flex;
   gap: 1rem;
