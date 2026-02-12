@@ -151,7 +151,7 @@
   justify-content: center;
   padding: 0.5rem 1rem;
   font-weight: 700;
-  color: #13ce66;
+  color: #2d6a4f;
   background-color: #ffffff;
   border: none;
   border-radius: 100px;
@@ -637,13 +637,13 @@
   text-decoration: none;
   font-weight: 600;
   color: #fff;
-  background-color: #25d366;
+  background-color: #2d8b5c;
   transition:
     background-color 0.2s,
     transform 0.2s;
 }
 .contacts-block .whatsapp-btn:hover {
-  background-color: #20bd5a;
+  background-color: #247a50;
   transform: translateY(-1px);
 }
 
