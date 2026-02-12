@@ -635,7 +635,6 @@
   padding: 8px 14px;
   border-radius: 20px;
   text-decoration: none;
-  display: inline-block;
   font-weight: 600;
   color: #fff;
   background-color: #25d366;
@@ -646,6 +645,23 @@
 .contacts-block .whatsapp-btn:hover {
   background-color: #20bd5a;
   transform: translateY(-1px);
+}
+
+/* Кнопки «Открыть чат» с иконкой */
+.chat-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+.chat-btn__icon {
+  flex-shrink: 0;
+}
+.chat-btn__icon--max {
+  font-size: 10px;
+}
+.chat-btn__icon--max text {
+  fill: currentColor;
 }
 
 .contact__links {
